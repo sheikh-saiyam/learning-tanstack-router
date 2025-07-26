@@ -15,7 +15,7 @@ function App() {
           alt="logo"
         />
         <p>
-          Edit <code>src/routes/index.tsx</code> and save to reload.
+          Exploring and Learning <code>Tanstack Router</code>
         </p>
         <a
           className="text-[#61dafb] hover:underline"

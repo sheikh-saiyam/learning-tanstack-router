@@ -8,35 +8,70 @@
 // You should NOT make any changes in this file as it will be overwritten.
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
+import { createFileRoute } from '@tanstack/react-router'
+
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ProductsIndexRouteImport } from './routes/products/index'
+import { Route as AboutUsIndexRouteImport } from './routes/about-us/index'
+
+const ContactUsIndexLazyRouteImport = createFileRoute('/contact-us/')()
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ContactUsIndexLazyRoute = ContactUsIndexLazyRouteImport.update({
+  id: '/contact-us/',
+  path: '/contact-us/',
+  getParentRoute: () => rootRouteImport,
+} as any).lazy(() =>
+  import('./routes/contact-us/index.lazy').then((d) => d.Route),
+)
+const ProductsIndexRoute = ProductsIndexRouteImport.update({
+  id: '/products/',
+  path: '/products/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutUsIndexRoute = AboutUsIndexRouteImport.update({
+  id: '/about-us/',
+  path: '/about-us/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about-us': typeof AboutUsIndexRoute
+  '/products': typeof ProductsIndexRoute
+  '/contact-us': typeof ContactUsIndexLazyRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about-us': typeof AboutUsIndexRoute
+  '/products': typeof ProductsIndexRoute
+  '/contact-us': typeof ContactUsIndexLazyRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about-us/': typeof AboutUsIndexRoute
+  '/products/': typeof ProductsIndexRoute
+  '/contact-us/': typeof ContactUsIndexLazyRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths: '/' | '/about-us' | '/products' | '/contact-us'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/about-us' | '/products' | '/contact-us'
+  id: '__root__' | '/' | '/about-us/' | '/products/' | '/contact-us/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutUsIndexRoute: typeof AboutUsIndexRoute
+  ProductsIndexRoute: typeof ProductsIndexRoute
+  ContactUsIndexLazyRoute: typeof ContactUsIndexLazyRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +83,35 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/contact-us/': {
+      id: '/contact-us/'
+      path: '/contact-us'
+      fullPath: '/contact-us'
+      preLoaderRoute: typeof ContactUsIndexLazyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/products/': {
+      id: '/products/'
+      path: '/products'
+      fullPath: '/products'
+      preLoaderRoute: typeof ProductsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about-us/': {
+      id: '/about-us/'
+      path: '/about-us'
+      fullPath: '/about-us'
+      preLoaderRoute: typeof AboutUsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutUsIndexRoute: AboutUsIndexRoute,
+  ProductsIndexRoute: ProductsIndexRoute,
+  ContactUsIndexLazyRoute: ContactUsIndexLazyRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
