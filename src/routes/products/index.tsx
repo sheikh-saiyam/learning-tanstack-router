@@ -1,9 +1,23 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, Link } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/products/')({
   component: RouteComponent,
 })
 
 function RouteComponent() {
-  return <div>Hello "/products/"!</div>
+  const products: string[] = ['products1', 'products2', 'products3']
+  return (
+    <div className="flex items-center justify-center gap-4">
+      {products.map((product) => (
+        <Link
+          className="hover:underline"
+          key={product}
+          to={`/products/$productId`}
+          params={{ productId: product }}
+        >
+          {product}
+        </Link>
+      ))}
+    </div>
+  )
 }
