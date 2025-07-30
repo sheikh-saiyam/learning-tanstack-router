@@ -1,5 +1,6 @@
 import { useBearStore } from '@/store/useBear'
 import { createFileRoute } from '@tanstack/react-router'
+import { Button } from '@/components/ui/button'
 
 export const Route = createFileRoute('/zustand-bear/')({
   component: RouteComponent,
@@ -12,15 +13,15 @@ function RouteComponent() {
 
   const removeAllBears = useBearStore((state) => state.removeAllBears)
 
-  return (ss
+  return (
     <>
       <h1>{bears} bears around here...</h1>
-      <button onClick={increasePopulation} className="px-2 py-2 border rounded">
+      <Button variant="default" onClick={increasePopulation}>
         one up
-      </button>
-      <button onClick={removeAllBears} className="px-2 py-2 border rounded">
+      </Button>
+      <Button variant="default" onClick={removeAllBears}>
         remove
-      </button>
+      </Button>
     </>
   )
 }
