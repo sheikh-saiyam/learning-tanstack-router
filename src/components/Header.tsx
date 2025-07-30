@@ -18,8 +18,8 @@ export default function Header() {
           <Link className="hover:underline" to="/products">
             Products
           </Link>
-          <Link className="hover:underline" to="/dashboard">
-            Dashboard
+          <Link className="hover:underline" to="/zustand-bear">
+            Zustand Bear
           </Link>
         </div>
       </nav>

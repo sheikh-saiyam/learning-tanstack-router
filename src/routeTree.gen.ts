@@ -12,6 +12,7 @@ import { createFileRoute } from '@tanstack/react-router'
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ZustandBearIndexRouteImport } from './routes/zustand-bear/index'
 import { Route as ProductsIndexRouteImport } from './routes/products/index'
 import { Route as AboutUsIndexRouteImport } from './routes/about-us/index'
 import { Route as ProductsProductIdRouteImport } from './routes/products/$productId'
@@ -30,6 +31,11 @@ const ContactUsIndexLazyRoute = ContactUsIndexLazyRouteImport.update({
 } as any).lazy(() =>
   import('./routes/contact-us/index.lazy').then((d) => d.Route),
 )
+const ZustandBearIndexRoute = ZustandBearIndexRouteImport.update({
+  id: '/zustand-bear/',
+  path: '/zustand-bear/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ProductsIndexRoute = ProductsIndexRouteImport.update({
   id: '/products/',
   path: '/products/',
@@ -51,6 +57,7 @@ export interface FileRoutesByFullPath {
   '/products/$productId': typeof ProductsProductIdRoute
   '/about-us': typeof AboutUsIndexRoute
   '/products': typeof ProductsIndexRoute
+  '/zustand-bear': typeof ZustandBearIndexRoute
   '/contact-us': typeof ContactUsIndexLazyRoute
 }
 export interface FileRoutesByTo {
@@ -58,6 +65,7 @@ export interface FileRoutesByTo {
   '/products/$productId': typeof ProductsProductIdRoute
   '/about-us': typeof AboutUsIndexRoute
   '/products': typeof ProductsIndexRoute
+  '/zustand-bear': typeof ZustandBearIndexRoute
   '/contact-us': typeof ContactUsIndexLazyRoute
 }
 export interface FileRoutesById {
@@ -66,6 +74,7 @@ export interface FileRoutesById {
   '/products/$productId': typeof ProductsProductIdRoute
   '/about-us/': typeof AboutUsIndexRoute
   '/products/': typeof ProductsIndexRoute
+  '/zustand-bear/': typeof ZustandBearIndexRoute
   '/contact-us/': typeof ContactUsIndexLazyRoute
 }
 export interface FileRouteTypes {
@@ -75,15 +84,23 @@ export interface FileRouteTypes {
     | '/products/$productId'
     | '/about-us'
     | '/products'
+    | '/zustand-bear'
     | '/contact-us'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/products/$productId' | '/about-us' | '/products' | '/contact-us'
+  to:
+    | '/'
+    | '/products/$productId'
+    | '/about-us'
+    | '/products'
+    | '/zustand-bear'
+    | '/contact-us'
   id:
     | '__root__'
     | '/'
     | '/products/$productId'
     | '/about-us/'
     | '/products/'
+    | '/zustand-bear/'
     | '/contact-us/'
   fileRoutesById: FileRoutesById
 }
@@ -92,6 +109,7 @@ export interface RootRouteChildren {
   ProductsProductIdRoute: typeof ProductsProductIdRoute
   AboutUsIndexRoute: typeof AboutUsIndexRoute
   ProductsIndexRoute: typeof ProductsIndexRoute
+  ZustandBearIndexRoute: typeof ZustandBearIndexRoute
   ContactUsIndexLazyRoute: typeof ContactUsIndexLazyRoute
 }
 
@@ -109,6 +127,13 @@ declare module '@tanstack/react-router' {
       path: '/contact-us'
       fullPath: '/contact-us'
       preLoaderRoute: typeof ContactUsIndexLazyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/zustand-bear/': {
+      id: '/zustand-bear/'
+      path: '/zustand-bear'
+      fullPath: '/zustand-bear'
+      preLoaderRoute: typeof ZustandBearIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/products/': {
@@ -140,6 +165,7 @@ const rootRouteChildren: RootRouteChildren = {
   ProductsProductIdRoute: ProductsProductIdRoute,
   AboutUsIndexRoute: AboutUsIndexRoute,
   ProductsIndexRoute: ProductsIndexRoute,
+  ZustandBearIndexRoute: ZustandBearIndexRoute,
   ContactUsIndexLazyRoute: ContactUsIndexLazyRoute,
 }
 export const routeTree = rootRouteImport
