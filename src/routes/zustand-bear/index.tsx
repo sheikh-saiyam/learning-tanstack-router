@@ -14,18 +14,23 @@ function RouteComponent() {
   const removeAllBears = useBearStore((state) => state.removeAllBears)
 
   const updateBears = useBearStore((state) => state.updateBears)
+
   return (
-    <div className='container'>
-      <h1>{bears} bears around here...</h1>
-      <Button variant="default" onClick={increasePopulation}>
-        one up
-      </Button>
-      <Button variant="default" onClick={removeAllBears}>
-        remove
-      </Button>
-      <Button variant="default" onClick={() => updateBears(1000)}>
-        Update
-      </Button>
+    <div className="flex items-center justify-center min-h-screen flex-col gap-2">
+      <h1>
+        <strong>{bears}</strong> bears around here...
+      </h1>
+      <div className="flex items-center gap-1.5">
+        <Button variant="default" onClick={increasePopulation}>
+          one up
+        </Button>
+        <Button variant="default" onClick={removeAllBears}>
+          remove
+        </Button>
+        <Button variant="default" onClick={() => updateBears(1000)}>
+          Update
+        </Button>
+      </div>
     </div>
   )
 }

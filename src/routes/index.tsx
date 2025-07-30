@@ -15,23 +15,23 @@ function App() {
           alt="logo"
         />
         <p>
-          Exploring and Learning <code>Tanstack Router</code>
+          Exploring and Learning <code>Tanstack Router with Zustand</code>
         </p>
-        <a
-          className="text-[#61dafb] hover:underline"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
         <a
           className="text-[#61dafb] hover:underline"
           href="https://tanstack.com"
           target="_blank"
           rel="noopener noreferrer"
         >
-          Learn TanStack
+          Tanstack Router
+        </a>
+        <a
+          className="text-[#61dafb] hover:underline"
+          href="https://zustand.docs.pmnd.rs/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Zustand
         </a>
       </header>
     </div>
