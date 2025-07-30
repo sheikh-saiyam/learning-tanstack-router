@@ -13,8 +13,9 @@ function RouteComponent() {
 
   const removeAllBears = useBearStore((state) => state.removeAllBears)
 
+  const updateBears = useBearStore((state) => state.updateBears)
   return (
-    <>
+    <div className='container'>
       <h1>{bears} bears around here...</h1>
       <Button variant="default" onClick={increasePopulation}>
         one up
@@ -22,6 +23,9 @@ function RouteComponent() {
       <Button variant="default" onClick={removeAllBears}>
         remove
       </Button>
-    </>
+      <Button variant="default" onClick={() => updateBears(1000)}>
+        Update
+      </Button>
+    </div>
   )
 }
