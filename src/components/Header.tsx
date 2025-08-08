@@ -14,7 +14,9 @@ const Header = () => {
       <nav className="mx-auto w-11/12 md:w-[90%] max-w-screen-2xl flex items-center justify-between px-4 py-5">
         {/* logo */}
         <div>
-          <Button className={'hover:scale-105'}>Tanstack Router with Zustand</Button>
+          <Button className={'hover:scale-105'}>
+            Tanstack Router with Zustand
+          </Button>
         </div>
         <div className="flex gap-12 items-center">
           {/* nav links */}
