@@ -1,15 +1,16 @@
 import { productsArr } from '@/lib/products'
 import { create } from 'zustand'
 
+interface Product {
+  id?: number
+  title?: string
+  description?: string
+  price?: number
+  image?: string
+  category?: string
+}
 interface ProductStore {
-  products: {
-    id?: number
-    title?: string
-    description?: string
-    price?: number
-    image?: string
-    category?: string
-  }[]
+  products: Product[]
   addProduct: (product: Omit<Product, 'id'>) => void
   updateProduct: (product: Product) => void
   deleteProduct: (id: number) => void
